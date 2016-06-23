@@ -1,0 +1,54 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.5
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: fq
+    volumes:
+      - /var/lib/postgresql
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: turbine
+      RABBITMQ_DEFAULT_PASS: turbine
+    volumes:
+      - /var/lib/rabbitmq/
+
+  hystrix:
+    build: hystrixdashboard/.
+    links:
+      - turbine_server
+    ports:
+      - "8989:8989"
+
+  turbine_server:
+    build: turbine/.
+    links:
+      - rabbitmq
+    ports:
+      - "8090:8090"
+
+  persona_api:
+    build: persona/.
+    ports:
+      - "8080"
+    links:
+      - postgres
+      - rabbitmq
+
+  lb:
+    image: 'dockercloud/haproxy:1.5.1'
+    links:
+      - persona_api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80

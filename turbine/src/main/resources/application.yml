@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: dev
+  rabbitmq:
+    username: turbine
+    password: turbine
+    useSSL: false
+
+server:
+  compression.enabled: true
+  port: 8090
+
+turbine:
+  aggregator:
+    clusterConfig: persona_api
+  appConfig: persona_api
+
+---
+
+spring:
+  profiles: dev
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+
+---
+
+spring:
+  profiles: docker
+  rabbitmq:
+    addresses: rabbitmq:5672

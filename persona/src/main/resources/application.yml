@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: persona_api
+  profiles:
+    active: dev
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    username: turbine
+    password: turbine
+    useSSL: false
+
+server:
+  compression.enabled: true
+  port: ${PORT:8080}
+
+params:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    maximumPoolSize: 10
+    poolName: fq_connection_pool
+
+spring.jpa:
+  show-sql: true
+  hibernate:
+    ddl-auto: update
+
+foursquare:
+  client: GOAJXAPN5S0AHHLISDXKETLOTQDYWPB1HLEK0KZJKDT45XD3
+  secret: 1KRCVCWJ4AMEH2HQWPL3235KSC5XKSDXZWDN3LYARSJP3CAZ
+
+watson:
+  username: 56eb4de-6060-429d-bfb5-45c8b49dc062
+  password: Kbor4y3fCqmL
+  url: https://gateway.watsonplatform.net/personality-insights/api
+
+turbine:
+  aggregator:
+    clusterConfig: persona
+  appConfig: persona_api
+
+---
+
+spring:
+  profiles: dev
+
+params:
+  datasource:
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/fq
+
+---
+
+spring:
+  profiles: docker
+  rabbitmq:
+    addresses: rabbitmq:5672
+
+params:
+  datasource:
+    jdbcUrl: jdbc:postgresql://postgres:5432/fq
