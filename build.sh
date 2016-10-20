@@ -6,7 +6,7 @@ cd hystrixdashboard; mvn clean package -DskipTests; cd -
 cd turbine; mvn clean package -DskipTests; cd -
 cd persona; mvn clean package -DskipTests; cd -
 
-docker-compose build;
+# docker-compose build;
 
 cd hystrixdashboard; mvn clean; cd -
 cd turbine; mvn clean; cd -
