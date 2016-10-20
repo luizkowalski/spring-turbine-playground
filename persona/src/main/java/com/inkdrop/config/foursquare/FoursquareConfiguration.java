@@ -13,13 +13,13 @@ public class FoursquareConfiguration {
 
 	@Value("${foursquare.client}")
 	String clientId;
-	
+
 	@Value("${foursquare.secret}")
 	String clientSecret;
-	
+
 	@Bean
 	public FoursquareApi newApi(){
-		log.info("new Foursquare API with "+clientId+" and "+clientSecret);
+		log.info("new Foursquare API with "+clientId);
 		return new FoursquareApi(clientId, clientSecret, null);
 	}
 }

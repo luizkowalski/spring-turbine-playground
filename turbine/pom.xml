@@ -51,13 +51,12 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-turbine-stream</artifactId>
     </dependency>
-    
+
     <dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <version>1.2</version>
-</dependency>
-    
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
 
     <dependency>
       <groupId>com.netflix.turbine</groupId>

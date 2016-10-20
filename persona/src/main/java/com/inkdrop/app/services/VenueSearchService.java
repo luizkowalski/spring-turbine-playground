@@ -19,10 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class VenueSearchService {
-	
+
 	@Autowired
 	protected FoursquareApi foursquareApi;
-	
+
 	@HystrixCommand(fallbackMethod="searchFallback")
 	public void searchVenue(String location) throws FoursquareApiException {
 		log.info("Location: "+location);
@@ -36,11 +36,11 @@ public class VenueSearchService {
 //		for (CompactVenue venue : compactVenues) {
 //			findOrCreateVenue(venue);
 //		}
-		
+
 	}
-	
+
 //	private void findOrCreateVenue(CompactVenue venue) {
-//		
+//
 //	}
 
 	private Map<String, String> getSearchParams(String location) {
@@ -50,11 +50,11 @@ public class VenueSearchService {
 		params.put("m", "foursquare");
 		params.put("v", "20160101");
 		params.put("intent", "browse");
-		
+
 		return params;
 	}
 
 	public void searchFallback(String location){
-		log.info("Circuit is closed");
+		log.info("Circuit is OPEN");
 	}
 }
